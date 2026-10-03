@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D0D0B">
+    <title>Mrtay.dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500&family=Syne:wght@700;800&display=swap">
+    <style>
+        :root {
+            --bg: #0D0D0B;
+            --ink: #ECE8DF;
+            --muted: #8B877D;
+            --acid: #D4FF3F;
+            --line: rgba(236, 232, 223, 0.15);
+            --font-d: 'Syne', sans-serif;
+            --font-b: 'Space Grotesk', sans-serif;
+            --pad: clamp(20px, 5vw, 64px);
+            --bg-glass: rgba(13, 13, 11, .55);
+            --bg-soft: #161613;
+            --acid-glass: rgba(212, 255, 63, .14);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-b);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        button {
+            font: inherit;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        ::selection {
+            background: var(--acid);
+            color: var(--bg);
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .js [data-reveal="up"] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .8s ease, transform .9s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .js [data-reveal="up"].in-view {
+            opacity: 1;
+            transform: none;
+        }
+
+        .js [data-reveal="clip"] {
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 1.1s cubic-bezier(.76, 0, .24, 1);
+        }
+
+        .js [data-reveal="clip"].in-view {
+            clip-path: inset(0 0 0 0);
+        }
+
+        .js [data-reveal="clip"] img {
+            transform: scale(1.25);
+            transition: transform 1.1s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .js [data-reveal="clip"].in-view img {
+            transform: scale(1);
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 120;
+            pointer-events: none;
+            opacity: .05;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+        }
+
+        .loader {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: var(--bg);
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+            animation: curtain .7s cubic-bezier(.76, 0, .24, 1) 1.3s forwards;
+        }
+
+        .loader-word {
+            display: flex;
+            overflow: hidden;
+        }
+
+        .loader-word span {
+            display: inline-block;
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(2.2rem, 9vw, 4.5rem);
+            color: var(--ink);
+            text-transform: uppercase;
+            transform: translateY(120%);
+            animation: rise .6s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .loader-word span:nth-child(1) {
+            animation-delay: .05s;
+        }
+
+        .loader-word span:nth-child(2) {
+            animation-delay: .12s;
+        }
+
+        .loader-word span:nth-child(3) {
+            animation-delay: .19s;
+        }
+
+        .loader-word span:nth-child(4) {
+            animation-delay: .26s;
+        }
+
+        .loader-word span:nth-child(5) {
+            animation-delay: .33s;
+        }
+
+        .loader::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 100%;
+            background: var(--acid);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: loadbar 1.25s cubic-bezier(.76, 0, .24, 1) .05s forwards;
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes curtain {
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        @keyframes loadbar {
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-delay: 0ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ==== STEP 2: HEADER ==== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--pad);
+            background: var(--bg-glass);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            transition: transform .45s cubic-bezier(.76, 0, .24, 1);
+        }
+
+        header.is-hidden {
+            transform: translateY(-100%);
+        }
+
+        .logo {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: .04em;
+        }
+
+        .logo span {
+            color: var(--acid);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(16px, 3vw, 32px);
+        }
+
+        .nav-link {
+            font-size: .78rem;
+            font-weight: 500;
+            letter-spacing: .16em;
+            position: relative;
+            padding: 4px 0;
+            transition: color .3s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;
+            background: var(--acid);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform .35s cubic-bezier(.76, 0, .24, 1);
+        }
+
+        .nav-link:hover {
+            color: var(--acid);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .hide-m {
+            display: none;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: .68rem;
+            letter-spacing: .16em;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .dot {
+            position: relative;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--acid);
+            flex-shrink: 0;
+        }
+
+        .dot::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1px solid var(--acid);
+            animation: ping 2s cubic-bezier(0, 0, .2, 1) infinite;
+        }
+
+        @keyframes ping {
+
+            75%,
+            100% {
+                transform: scale(2.4);
+                opacity: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hide-m {
+                display: inline;
+            }
+        }
+
+        /* ==== STEP 2: HERO ==== */
+        .hero {
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            padding: 104px var(--pad) 24px;
+        }
+
+        .pfp-parallax {
+            transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+            will-change: transform;
+        }
+
+        .pfp-wrap {
+            position: relative;
+            width: clamp(112px, 30vw, 168px);
+            opacity: 0;
+            transform: scale(.6);
+            animation: pop .9s cubic-bezier(.22, 1, .36, 1) 1.55s forwards;
+        }
+
+        .pfp {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            filter: grayscale(1);
+            transition: filter .5s ease, transform .5s cubic-bezier(.22, 1, .36, 1);
+        }
+
+        .pfp-wrap:hover .pfp {
+            filter: grayscale(0);
+            transform: scale(1.05);
+        }
+
+        .ring {
+            position: absolute;
+            top: -16%;
+            left: -16%;
+            width: 132%;
+            height: 132%;
+            overflow: visible;
+            animation: spin 14s linear infinite;
+            pointer-events: none;
+        }
+
+        .ring text {
+            font-family: var(--font-b);
+            font-size: 6.2px;
+            font-weight: 500;
+            letter-spacing: .22em;
+            fill: var(--acid);
+        }
+
+        .hero-name {
+            position: relative;
+            z-index: 1;
+            margin-top: clamp(20px, 4vh, 44px);
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(3rem, 14.5vw, 10.5rem);
+            line-height: .92;
+            letter-spacing: -.02em;
+            text-transform: uppercase;
+        }
+
+        .hero-name .line {
+            display: block;
+            overflow: hidden;
+            padding-bottom: .06em;
+        }
+
+        .hero-name .line-inner {
+            display: inline-block;
+            transform: translateY(115%);
+            animation: rise .9s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .hero-name .line:nth-child(1) .line-inner {
+            animation-delay: 1.75s;
+        }
+
+        .hero-name .line:nth-child(2) .line-inner {
+            animation-delay: 1.9s;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--ink);
+        }
+
+        .hero-role {
+            margin-top: clamp(16px, 3vh, 28px);
+            max-width: 36ch;
+            color: var(--muted);
+            font-size: clamp(1rem, 2.6vw, 1.3rem);
+            line-height: 1.55;
+            opacity: 0;
+            animation: fadeUp .8s ease 2.2s forwards;
+        }
+
+        .hl {
+            color: var(--acid);
+        }
+
+        .hero-meta {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--line);
+            padding-top: 16px;
+            font-size: .7rem;
+            letter-spacing: .2em;
+            color: var(--muted);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeUp .8s ease 2.6s forwards;
+        }
+
+        .scroll-cue {
+            white-space: nowrap;
+        }
+
+        .cue-arrow {
+            display: inline-block;
+            color: var(--acid);
+            animation: bob 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pop {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes bob {
+            50% {
+                transform: translateY(6px);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 120px clamp(40px, 6vw, 80px) 32px;
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .hero {
+                position: relative;
+            }
+
+            .pfp-parallax {
+                position: absolute;
+                top: 16vh;
+                right: clamp(40px, 7vw, 120px);
+                z-index: 0;
+            }
+
+            .pfp-wrap {
+                width: clamp(180px, 16vw, 230px);
+            }
+
+            .hero-name {
+                font-size: clamp(7rem, 12.5vw, 11.5rem);
+            }
+
+            .hero-role {
+                max-width: 30ch;
+            }
+        }
+
+        /* ==== STEP 3: HERO BIO ==== */
+        .hero-bio {
+            margin-top: clamp(20px, 4vh, 36px);
+            max-width: 46ch;
+            opacity: 0;
+            animation: fadeUp .8s ease 2.45s forwards;
+        }
+
+        .bio-kicker {
+            font-size: .7rem;
+            font-weight: 500;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--acid);
+            margin-bottom: 10px;
+        }
+
+        .bio-text {
+            color: var(--muted);
+            font-size: clamp(.95rem, 2.4vw, 1.05rem);
+            line-height: 1.7;
+        }
+
+        .bio-text em {
+            font-style: italic;
+            color: var(--ink);
+        }
+
+        /* ==== STEP 3: MARQUEE ==== */
+        .marquee {
+            overflow: hidden;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 18px 0;
+        }
+
+        .mq-track {
+            display: flex;
+            width: max-content;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+        }
+
+        .mq-group {
+            display: flex;
+            align-items: center;
+            gap: clamp(22px, 4vw, 44px);
+            padding-right: clamp(22px, 4vw, 44px);
+        }
+
+        .mq-word {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(1.6rem, 5vw, 3rem);
+            line-height: 1;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--ink);
+        }
+
+        .mq-outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--muted);
+        }
+
+        .mq-star {
+            width: 11px;
+            height: 11px;
+            flex-shrink: 0;
+            background: var(--acid);
+            transform: rotate(45deg);
+            animation: starSpin 7s linear infinite;
+        }
+
+        @keyframes starSpin {
+            from {
+                transform: rotate(45deg);
+            }
+
+            to {
+                transform: rotate(405deg);
+            }
+        }
+
+        /* ==== STEP 3: DESKTOP ==== */
+        @media (min-width: 1100px) {
+            .hero-bio {
+                max-width: 42ch;
+            }
+
+            .bio-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ==== STEP 4: WORK SECTION ==== */
+        .label {
+            font-size: .72rem;
+            font-weight: 500;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: clamp(20px, 4vh, 32px);
+        }
+
+        .work {
+            padding: clamp(80px, 14vh, 150px) var(--pad);
+        }
+
+        .work-title {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 10vw, 6.8rem);
+            line-height: .95;
+            text-transform: uppercase;
+            margin-bottom: clamp(40px, 9vh, 80px);
+        }
+
+        .work-outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--ink);
+        }
+
+        .work-list {
+            display: block;
+        }
+
+        .project {
+            position: relative;
+            display: grid;
+            grid-template-areas: "head" "gif" "sub";
+            gap: 18px;
+            padding: clamp(32px, 6vh, 56px) 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .project:last-child {
+            border-bottom: 1px solid var(--line);
+        }
+
+        .project::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--acid);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform .45s cubic-bezier(.76, 0, .24, 1);
+            z-index: 0;
+        }
+
+        .project>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .p-head {
+            grid-area: head;
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+        }
+
+        .p-index {
+            font-size: .8rem;
+            font-weight: 500;
+            letter-spacing: .2em;
+            color: var(--acid);
+            transition: color .3s ease;
+        }
+
+        .p-title {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(1.7rem, 6vw, 3.2rem);
+            line-height: 1.02;
+            text-transform: uppercase;
+            transition: color .3s ease;
+        }
+
+        .gif-wrap {
+            grid-area: gif;
+            display: block;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            aspect-ratio: 16 / 10;
+            background: var(--bg-soft);
+        }
+
+        .gif-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .p-sub {
+            grid-area: sub;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px 16px;
+            flex-wrap: wrap;
+        }
+
+        .p-tags {
+            font-size: .72rem;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: color .3s ease;
+        }
+
+        .p-visit {
+            font-size: .75rem;
+            font-weight: 500;
+            letter-spacing: .18em;
+            border-bottom: 1px solid var(--acid);
+            padding-bottom: 2px;
+            white-space: nowrap;
+            transition: color .3s ease, border-color .3s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .project:hover::before {
+                transform: scaleY(1);
+            }
+
+            .project:hover .p-index,
+            .project:hover .p-title,
+            .project:hover .p-tags,
+            .project:hover .p-visit {
+                color: var(--bg);
+            }
+
+            .project:hover .p-visit {
+                border-color: var(--bg);
+            }
+
+            .project:hover .gif-wrap {
+                border-color: var(--bg);
+            }
+
+            .project:hover .gif-wrap img {
+                transform: scale(1.05);
+                transition: transform .7s cubic-bezier(.22, 1, .36, 1);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .project {
+                grid-template-columns: .9fr 1.1fr;
+                grid-template-areas: "head gif" "sub gif";
+                column-gap: clamp(24px, 4vw, 64px);
+                align-content: center;
+            }
+        }
+
+        /* ==== STEP 5: SKILLS ==== */
+        .skills {
+            padding: clamp(80px, 14vh, 150px) var(--pad);
+        }
+
+        .skills-title {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(2.5rem, 10vw, 6.8rem);
+            line-height: .95;
+            text-transform: uppercase;
+            margin-bottom: clamp(40px, 9vh, 80px);
+        }
+
+        .skills-outline {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--ink);
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .skill {
+            border-top: 1px solid var(--line);
+            padding: clamp(18px, 3vh, 30px) 0;
+        }
+
+        .skill-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .skill-name {
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(1.25rem, 4.5vw, 2rem);
+            line-height: 1.05;
+            text-transform: uppercase;
+            transition: color .3s ease;
+        }
+
+        .skill-num {
+            font-size: clamp(.95rem, 2.6vw, 1.25rem);
+            font-weight: 500;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            min-width: 3.5ch;
+            text-align: right;
+            transition: color .3s ease;
+        }
+
+        .skill-track {
+            height: 3px;
+            background: var(--line);
+        }
+
+        .skill-fill {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: var(--fill);
+            background: var(--acid);
+        }
+
+        .skill-fill::after {
+            content: "";
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            margin-top: -4px;
+            width: 8px;
+            height: 8px;
+            background: var(--acid);
+            animation: starSpin 7s linear infinite;
+            transition: opacity .4s ease .45s;
+        }
+
+        .js .skill-fill {
+            width: 0;
+            transition: width 1.1s cubic-bezier(.22, 1, .36, 1) .25s;
+        }
+
+        .js .skill.in-view .skill-fill {
+            width: var(--fill);
+        }
+
+        .js .skill:not(.in-view) .skill-fill::after {
+            opacity: 0;
+        }
+
+        .skill:nth-child(2) .skill-fill {
+            transition-delay: .37s;
+        }
+
+        .skill:nth-child(3) .skill-fill {
+            transition-delay: .49s;
+        }
+
+        .skill:nth-child(4) .skill-fill {
+            transition-delay: .61s;
+        }
+
+        .skill:nth-child(5) .skill-fill {
+            transition-delay: .73s;
+        }
+
+        .skill:nth-child(6) .skill-fill {
+            transition-delay: .85s;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .skill:hover .skill-name {
+                color: var(--acid);
+            }
+
+            .skill:hover .skill-num {
+                color: var(--ink);
+            }
+        }
+
+        @media (min-width: 1100px) {
+            .skills-list {
+                grid-template-columns: 1fr 1fr;
+                column-gap: clamp(48px, 6vw, 96px);
+            }
+
+            .skill {
+                padding: clamp(22px, 3vh, 34px) 0;
+            }
+        }
+
+        /* ==== STEP 6: FOOTER ==== */
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: clamp(72px, 12vh, 120px) var(--pad) 0;
+            scroll-margin-top: 64px;
+        }
+
+        .email {
+            display: inline-block;
+            margin-top: clamp(8px, 2vh, 16px);
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(1.6rem, 6.5vw, 3.6rem);
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: var(--acid);
+            position: relative;
+            word-break: break-all;
+            transition: color .3s ease;
+        }
+
+        .email::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            height: 2px;
+            width: 100%;
+            background: var(--acid);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform .45s cubic-bezier(.76, 0, .24, 1);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .email:hover {
+                color: var(--ink);
+            }
+
+            .email:hover::after {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+
+            .s-link:hover {
+                color: var(--acid);
+                transform: translateX(4px);
+            }
+
+            .to-top:hover {
+                color: var(--acid);
+            }
+        }
+
+        .foot-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px 32px;
+            margin-top: clamp(40px, 8vh, 72px);
+        }
+
+        .socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+        }
+
+        .s-link {
+            font-size: .78rem;
+            font-weight: 500;
+            letter-spacing: .16em;
+            transition: color .3s ease, transform .3s ease;
+        }
+
+        .clock {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .clock-label {
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        #clock {
+            font-size: .9rem;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+            color: var(--ink);
+        }
+
+        .to-top {
+            font-size: .7rem;
+            font-weight: 500;
+            letter-spacing: .2em;
+            color: var(--muted);
+            transition: color .3s ease;
+        }
+
+        .small-print {
+            margin-top: clamp(28px, 6vh, 48px);
+            font-size: .68rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .mark-clip {
+            overflow: hidden;
+            margin-top: clamp(40px, 8vh, 72px);
+            height: clamp(3.2rem, 9vw, 7.5rem);
+        }
+
+        .mark {
+            display: block;
+            font-family: var(--font-d);
+            font-weight: 800;
+            font-size: clamp(5rem, 15vw, 13rem);
+            line-height: .82;
+            text-transform: uppercase;
+            white-space: nowrap;
+            text-align: center;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--line);
+        }
+
+        .js .mark {
+            transform: translateY(45%);
+            transition: transform 1.2s cubic-bezier(.22, 1, .36, 1) .1s;
+        }
+
+        .js .mark-clip.in-view .mark {
+            transform: none;
+        }
+
+        /* ==== STEP 6: CUSTOM CURSOR ==== */
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 14px;
+            height: 14px;
+            margin: -7px 0 0 -7px;
+            border: 1.5px solid var(--acid);
+            border-radius: 50%;
+            background: transparent;
+            pointer-events: none;
+            z-index: 300;
+            opacity: 0;
+            will-change: transform;
+            transition: width .25s ease, height .25s ease, margin .25s ease, background-color .25s ease, opacity .3s ease;
+        }
+
+        .cursor.is-on {
+            opacity: 1;
+        }
+
+        .cursor.is-big {
+            width: 44px;
+            height: 44px;
+            margin: -22px 0 0 -22px;
+            background: var(--acid-glass);
+        }
+
+        @media (hover: none),
+        (pointer: coarse) {
+            .cursor {
+                display: none;
+            }
+        }
+
+        /* ==== STEP 6: DESKTOP ==== */
+        @media (min-width: 1100px) {
+            .email {
+                font-size: clamp(2.4rem, 4vw, 3.6rem);
+            }
+
+            .mark-clip {
+                height: clamp(5rem, 9vw, 7.5rem);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader" aria-hidden="true">
+        <div class="loader-word"><span>H</span><span>E</span><span>L</span><span>L</span><span>O</span></div>
+    </div>
+    <header>
+        <a class="logo" href="#top">MrTay<span>.</span></a>
+        <nav class="nav" aria-label="Primary">
+            <a class="nav-link hide-m" href="#work">WORK</a>
+            <a class="nav-link hide-m" href="#skills">SKILLS</a>
+            <a class="nav-link" href="#contact">CONTACT</a>
+            <span class="status"><span class="dot"></span>OPEN TO WORK</span>
+        </nav>
+    </header>
+    <main id="top">
+        <section class="hero" id="hero">
+            <div class="pfp-parallax">
+                <div class="pfp-wrap">
+                    <img class="pfp" src="hero-image.jpeg" alt="Portrait of [FIRST NAME] [LAST NAME]" width="320"
+                        height="320">
+                    <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+                        <defs>
+                            <path id="ringPath" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"></path>
+                        </defs>
+                        <text>
+                            <textPath href="#ringPath">OPEN TO WORK • OPEN TO WORK • OPEN TO WORK • </textPath>
+                        </text>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="hero-name">
+                <span class="line"><span class="line-inner">Mr</span></span>
+                <span class="line"><span class="line-inner">Tay</span></span>
+            </h1>
+            <p class="hero-role">Web Developer</p>
+            <div class="hero-bio">
+                <p class="bio-kicker">A LITTLE ABOUT ME</p>
+                <p class="bio-text">I'm a web developer focused on building modern, responsive, and user-friendly
+                    digital experiences.
+                    I enjoy turning ideas into practical products while continuously improving my skills in frontend and
+                    full-stack development.</p>
+            </div>
+            <div class="hero-meta">
+                <span>BASED IN Lahore</span>
+                <span class="scroll-cue">SCROLL <span class="cue-arrow">↓</span></span>
+            </div>
+        </section>
+        <div class="marquee" aria-hidden="true">
+            <div class="mq-track" id="mqTrack">
+                <div class="mq-group">
+                    <span class="mq-word">Frontend</span>
+                    <span class="mq-star"></span>
+                    <span class="mq-word mq-outline">Backend</span>
+                    <span class="mq-star"></span>
+                    <span class="mq-word">Database</span>
+                    <span class="mq-star"></span>
+                    <span class="mq-word mq-outline">DevOps</span>
+                    <span class="mq-star"></span>
+                </div>
+            </div>
+        </div>
+        <section class="work" id="work">
+            <p class="label" data-reveal="up">(01) — SELECTED WORK</p>
+            <h2 class="work-title" data-reveal="up">PROJECT<br><span class="work-outline">HIGHLIGHTS</span></h2>
+            <div class="work-list">
+
+                <article class="project">
+                    <div class="p-head" data-reveal="up">
+                        <span class="p-index">01</span>
+                        <h3 class="p-title">[P1 NAME]</h3>
+                    </div>
+                    <a class="gif-wrap" data-reveal="clip" href="[P1 URL]" target="_blank" rel="noopener"
+                        aria-label="Open [P1 NAME]">
+                        <img src="[P1 GIF URL]" alt="[P1 NAME] demo animation" width="800" height="500" loading="lazy"
+                            decoding="async">
+                    </a>
+                    <div class="p-sub" data-reveal="up">
+                        <p class="p-tags">[P1 TAGS]</p>
+                        <a class="p-visit" href="[P1 URL]" target="_blank" rel="noopener">VISIT ↗</a>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="p-head" data-reveal="up">
+                        <span class="p-index">02</span>
+                        <h3 class="p-title">[P2 NAME]</h3>
+                    </div>
+                    <a class="gif-wrap" data-reveal="clip" href="[P2 URL]" target="_blank" rel="noopener"
+                        aria-label="Open [P2 NAME]">
+                        <img src="[P2 GIF URL]" alt="[P2 NAME] demo animation" width="800" height="500" loading="lazy"
+                            decoding="async">
+                    </a>
+                    <div class="p-sub" data-reveal="up">
+                        <p class="p-tags">[P2 TAGS]</p>
+                        <a class="p-visit" href="[P2 URL]" target="_blank" rel="noopener">VISIT ↗</a>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="p-head" data-reveal="up">
+                        <span class="p-index">03</span>
+                        <h3 class="p-title">[P3 NAME]</h3>
+                    </div>
+                    <a class="gif-wrap" data-reveal="clip" href="[P3 URL]" target="_blank" rel="noopener"
+                        aria-label="Open [P3 NAME]">
+                        <img src="[P3 GIF URL]" alt="[P3 NAME] demo animation" width="800" height="500" loading="lazy"
+                            decoding="async">
+                    </a>
+                    <div class="p-sub" data-reveal="up">
+                        <p class="p-tags">[P3 TAGS]</p>
+                        <a class="p-visit" href="[P3 URL]" target="_blank" rel="noopener">VISIT ↗</a>
+                    </div>
+                </article>
+
+                <article class="project">
+                    <div class="p-head" data-reveal="up">
+                        <span class="p-index">04</span>
+                        <h3 class="p-title">[P4 NAME]</h3>
+                    </div>
+                    <a class="gif-wrap" data-reveal="clip" href="[P4 URL]" target="_blank" rel="noopener"
+                        aria-label="Open [P4 NAME]">
+                        <img src="[P4 GIF URL]" alt="[P4 NAME] demo animation" width="800" height="500" loading="lazy"
+                            decoding="async">
+                    </a>
+                    <div class="p-sub" data-reveal="up">
+                        <p class="p-tags">[P4 TAGS]</p>
+                        <a class="p-visit" href="[P4 URL]" target="_blank" rel="noopener">VISIT ↗</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+        <section class="skills" id="skills">
+            <p class="label" data-reveal="up">(02) — TOOLKIT</p>
+            <h2 class="skills-title" data-reveal="up">CORE<br><span class="skills-outline">STACK (06)</span></h2>
+            <div class="skills-list">
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S1 NAME]</h3>
+                        <span class="skill-num" data-count="[S1 LEVEL]">[S1 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S1 LEVEL]%"></span></div>
+                </div>
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S2 NAME]</h3>
+                        <span class="skill-num" data-count="[S2 LEVEL]">[S2 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S2 LEVEL]%"></span></div>
+                </div>
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S3 NAME]</h3>
+                        <span class="skill-num" data-count="[S3 LEVEL]">[S3 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S3 LEVEL]%"></span></div>
+                </div>
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S4 NAME]</h3>
+                        <span class="skill-num" data-count="[S4 LEVEL]">[S4 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S4 LEVEL]%"></span></div>
+                </div>
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S5 NAME]</h3>
+                        <span class="skill-num" data-count="[S5 LEVEL]">[S5 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S5 LEVEL]%"></span></div>
+                </div>
+
+                <div class="skill" data-reveal="up">
+                    <div class="skill-row">
+                        <h3 class="skill-name">[S6 NAME]</h3>
+                        <span class="skill-num" data-count="[S6 LEVEL]">[S6 LEVEL]%</span>
+                    </div>
+                    <div class="skill-track"><span class="skill-fill" style="--fill: [S6 LEVEL]%"></span></div>
+                </div>
+
+            </div>
+        </section>
+        <!-- SECTIONS -->
+    </main>
+    <footer class="footer" id="contact">
+        <p class="label" data-reveal="up">(03) — CONTACT</p>
+        <a class="email" data-reveal="up" href="mailto:[YOUR EMAIL]">[YOUR EMAIL]</a>
+        <div class="foot-row" data-reveal="up">
+            <ul class="socials">
+                <li><a class="s-link" href="[GITHUB URL]" target="_blank" rel="noopener">GITHUB ↗</a></li>
+                <li><a class="s-link" href="[X URL]" target="_blank" rel="noopener">TWITTER ↗</a></li>
+                <li><a class="s-link" href="[LINKEDIN URL]" target="_blank" rel="noopener">LINKEDIN ↗</a></li>
+                <li><a class="s-link" href="[RESUME URL]" target="_blank" rel="noopener">RESUME ↗</a></li>
+            </ul>
+            <div class="clock"><span class="clock-label">LOCAL TIME</span><span id="clock">00:00:00</span></div>
+            <a class="to-top" href="#top">BACK TO TOP ↑</a>
+        </div>
+        <p class="small-print">© [YEAR] [YOUR NAME] — DESIGNED &amp; BUILT BY HAND. NO FRAMEWORKS.</p>
+        <div class="mark-clip" data-reveal="up" aria-hidden="true"><span class="mark">[YOUR NAME]</span></div>
+    </footer>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" id="cursor" aria-hidden="true"></div>
+    <script>
+        document.documentElement.classList.add('js');
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.18 });
+        document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+
+        // ==== LATER STEPS APPEND JS BELOW THIS LINE ====
+
+        // ==== STEP 2 JS: HEADER + HERO ====
+
+        // Header hides on scroll down, returns on scroll up
+        const headerEl = document.querySelector('header');
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            headerEl.classList.toggle('is-hidden', y > 140 && y > lastScrollY);
+            lastScrollY = y;
+        }, { passive: true });
+
+        // Pfp parallax — desktop pointers only, skipped when reduced motion is requested
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (finePointer && motionOK) {
+            const parallaxEl = document.querySelector('.pfp-parallax');
+            const heroEl = document.querySelector('.hero');
+            heroEl.addEventListener('mousemove', (e) => {
+                const r = heroEl.getBoundingClientRect();
+                const nx = (e.clientX - r.left) / r.width - 0.5;
+                const ny = (e.clientY - r.top) / r.height - 0.5;
+                parallaxEl.style.transform = 'translate(' + (nx * 18).toFixed(1) + 'px, ' + (ny * 14).toFixed(1) + 'px)';
+            });
+            heroEl.addEventListener('mouseleave', () => {
+                parallaxEl.style.transform = 'translate(0px, 0px)';
+            });
+        }
+
+        // ==== STEP 3 JS: VELOCITY MARQUEE ====
+        // motionOK already exists from STEP 2. Do not redeclare it.
+        const mqTrack = document.getElementById('mqTrack');
+        const mqWrap = document.querySelector('.marquee');
+        if (mqTrack && mqWrap && motionOK) {
+            const mqGroup = mqTrack.querySelector('.mq-group');
+            if (mqGroup) {
+                for (let i = 0; i < 3; i++) {
+                    mqTrack.appendChild(mqGroup.cloneNode(true));
+                }
+                let mqX = 0;
+                let mqSpeed = 0.6;
+                let lastY = window.scrollY;
+                const MQ_BASE = 0.6;
+                const stepMq = () => {
+                    const y = window.scrollY;
+                    const vel = Math.min(Math.abs(y - lastY), 60);
+                    lastY = y;
+                    const target = MQ_BASE + vel * 0.12;
+                    mqSpeed += (target - mqSpeed) * 0.08;
+                    if (!mqWrap.matches(':hover')) {
+                        mqX -= mqSpeed;
+                    }
+                    const gw = mqGroup.offsetWidth;
+                    if (gw > 0 && mqX <= -gw) {
+                        mqX += gw;
+                    }
+                    mqTrack.style.transform = 'translate3d(' + mqX.toFixed(2) + 'px, 0, 0)';
+                    requestAnimationFrame(stepMq);
+                };
+                requestAnimationFrame(stepMq);
+            }
+        }
+
+        // ==== STEP 5 JS: SKILL COUNTERS ====
+        const counters = document.querySelectorAll('.skill-num');
+        if (counters.length && motionOK) {
+            const countIO = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    countIO.unobserve(entry.target);
+                    const el = entry.target;
+                    const end = parseInt(el.dataset.count, 10);
+                    const t0 = performance.now();
+                    const tickCount = (now) => {
+                        const p = Math.min((now - t0) / 1200, 1);
+                        const eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.round(end * eased) + '%';
+                        if (p < 1) requestAnimationFrame(tickCount);
+                    };
+                    requestAnimationFrame(tickCount);
+                });
+            }, { threshold: 0.4 });
+            counters.forEach((el) => countIO.observe(el));
+        }
+
+        // ==== STEP 6 JS: CLOCK + CURSOR ====
+        const clockEl = document.getElementById('clock');
+        const tickClock = () => {
+            const d = new Date();
+            const pad = (n) => String(n).padStart(2, '0');
+            clockEl.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+        };
+        if (clockEl) {
+            tickClock();
+            setInterval(tickClock, 1000);
+        }
+
+        if (finePointer && motionOK) {
+            const cursorEl = document.getElementById('cursor');
+            if (cursorEl) {
+                let curX = -100;
+                let curY = -100;
+                let tx = -100;
+                let ty = -100;
+                let cursorRaf = null;
+                const moveCursor = () => {
+                    curX += (tx - curX) * 0.18;
+                    curY += (ty - curY) * 0.18;
+                    cursorEl.style.transform = 'translate(' + curX + 'px, ' + curY + 'px)';
+                    cursorRaf = requestAnimationFrame(moveCursor);
+                };
+                window.addEventListener('mousemove', (e) => {
+                    tx = e.clientX;
+                    ty = e.clientY;
+                    cursorEl.classList.add('is-on');
+                    if (cursorRaf === null) {
+                        cursorRaf = requestAnimationFrame(moveCursor);
+                    }
+                }, { passive: true });
+                document.addEventListener('mouseover', (e) => {
+                    cursorEl.classList.toggle('is-big', !!e.target.closest('a'));
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
