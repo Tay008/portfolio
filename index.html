@@ -723,25 +723,30 @@
               id="need"
               type="search"
               autocomplete="off"
-              placeholder="e.g. online store, bookings, fast website"
-              data-urp="maslan online dukaan, booking, tez website"
+              placeholder="e.g. marketplace, security scan, design tool, notes"
+              data-urp="maslan marketplace, security scan, design tool, notes"
             /><button class="btn ghost" data-ur="Dhoondein">Find</button>
           </div>
         </form>
         <ul class="chips">
           <li>
-            <a class="chip" href="#site" data-ur="Business website"
-              >Business website</a
+            <a class="chip" href="#bazaar" data-ur="Do tarfa marketplace"
+              >Bazaar</a
             >
           </li>
           <li>
-            <a class="chip" href="#store" data-ur="Online dukaan"
-              >Online store</a
+            <a class="chip" href="#argus" data-ur="Security scanner"
+              >Argus</a
             >
           </li>
           <li>
-            <a class="chip" href="#booking" data-ur="Booking page"
-              >Booking page</a
+            <a class="chip" href="#prism" data-ur="Realtime design tool"
+              >Prism</a
+            >
+          </li>
+          <li>
+            <a class="chip" href="#lumen" data-ur="Tutoring aur notes"
+              >Lumen</a
             >
           </li>
         </ul>
@@ -762,16 +767,16 @@
         <!-- ============ PROJECT 1 ============ -->
         <article
           class="stage"
-          id="site"
+          id="bazaar"
           data-lens="market"
-          data-kw="business company website brand academy clinic restaurant online presence web page google"
-          aria-labelledby="site-t"
+          data-kw="marketplace two sided multi vendor ecommerce sellers buyers vendor shop store orders cart checkout payouts escrow commission reviews catalog"
+          aria-labelledby="bazaar-t"
         >
           <p class="idx">
-            <span>01</span>/03 ·
-            <span data-ur="Business website">Business website</span>
+            <span>01</span>/04 ·
+            <span data-ur="Do tarfa marketplace">Two-sided marketplace</span>
           </p>
-          <h2 class="ttl" id="site-t">[PROJECT NAME]</h2>
+          <h2 class="ttl" id="bazaar-t">Bazaar</h2>
           <div class="wrap">
             <section
               class="panel"
@@ -782,34 +787,37 @@
               <div class="rib rise" style="--i: 0">
                 <b data-ur="FAISLA">THE VERDICT</b>
                 <ul>
-                  <li data-ur="Slow data par bhi tez khulti hai">
-                    Opens fast on slow data
+                  <li data-ur="Ek platform, do taraf: kharidar aur bechne wale">
+                    One platform, two sides: buyers and sellers
                   </li>
-                  <li data-ur="Har phone par theek nazar aati hai">
-                    Looks right on any phone
+                  <li data-ur="Payment khud baant jati hai, koi peecha nahi karta">
+                    Payments split themselves — nobody chases anybody
                   </li>
-                  <li data-ur="Google search mein nazar aati hai">
-                    Shows up in Google search
+                  <li data-ur="Bharosa shuru se: reviews aur verified sellers">
+                    Trust from day one: reviews and verified sellers
                   </li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/site-market"
-                data-alt="A visitor opens the academy site on a phone and taps the WhatsApp button."
+                data-demo="demos/bazaar-market"
+                data-alt="A seller lists an item, a buyer pays, and the payout splits automatically on a phone."
               >
-                <span>Demo video: add demos/site-market.mp4</span>
+                <span>Demo video: add demos/bazaar-market.mp4</span>
               </figure>
               <p class="story rise" style="--i: 2">
-                EXAMPLE: A local academy relied on word of mouth. Now parents
-                find it on Google, see fees and timings on their phone, and
-                message on WhatsApp.
+                PITCH: Every marketplace dies the same way — sellers arrive to
+                no buyers, or buyers to empty shelves. Bazaar fixes the cold
+                start: sellers list in minutes, buyers land on a curated
+                catalog, and the platform earns a cut on every completed order.
+                Each new seller makes the buyer side worth more, and every new
+                buyer pulls in more sellers.
               </p>
               <ul class="ben rise" style="--i: 3">
-                <li>Found on Google searches</li>
-                <li>Fees and timings always visible</li>
-                <li>Enquiries arrive on WhatsApp</li>
+                <li>Both sides live in one sprint</li>
+                <li>Revenue on orders, not signups</li>
+                <li>Reviews and verification sell for you</li>
               </ul>
               <div class="act rise" style="--i: 4">
                 <button
@@ -821,9 +829,9 @@
                 ><a
                   class="btn ghost"
                   href="#contact"
-                  data-w="Business website"
-                  data-ur="Mujhe bhi aisa kuch chahiye?"
-                  >Want one like this?</a
+                  data-w="Bazaar"
+                  data-ur="Demo maangein"
+                  >Request a demo</a
                 >
               </div>
             </section>
@@ -835,34 +843,43 @@
             >
               <div class="rib tech rise" style="--i: 0">
                 <b>STACK</b>
-                <p>HTML · CSS · Vanilla JS · Cloudflare</p>
+                <p>Next.js · TypeScript · PostgreSQL · Stripe Connect · Redis</p>
                 <ul class="flags">
-                  <li>A11y AA</li>
-                  <li>No cookies</li>
-                  <li>EXAMPLE: LCP 1.4 s</li>
+                  <li>Multi-vendor</li>
+                  <li>Escrow payouts</li>
+                  <li>SSR storefront</li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/site-tech"
-                data-alt="DevTools on Slow 4G while the page loads, then a Lighthouse report."
+                data-demo="demos/bazaar-tech"
+                data-alt="A seller dashboard showing an order, its split payout and the platform fee."
               >
-                <span>Demo video: add demos/site-tech.mp4</span>
+                <span>Demo video: add demos/bazaar-tech.mp4</span>
               </figure>
               <ol class="dec rise" style="--i: 2">
-                <li>Static pages: nothing to patch, near-zero hosting cost.</li>
-                <li>Fluid type scale: one file controls every size.</li>
-                <li>WhatsApp link instead of a heavy form.</li>
+                <li>
+                  Stripe Connect splits the money at capture, so the platform
+                  never holds funds.
+                </li>
+                <li>
+                  Row-level security keys every order and payout to its own
+                  seller.
+                </li>
+                <li>
+                  The catalog is cached at the edge; only cart and checkout
+                  reach the origin.
+                </li>
               </ol>
               <dl class="met rise" style="--i: 3">
                 <div>
-                  <dt>LCP, mobile (Lighthouse)</dt>
-                  <dd>EXAMPLE 1.4 s</dd>
+                  <dt>Checkout p95</dt>
+                  <dd>EXAMPLE 380 ms</dd>
                 </div>
                 <div>
-                  <dt>JavaScript shipped</dt>
-                  <dd>EXAMPLE 6 KB gzip</dd>
+                  <dt>Seller onboarding</dt>
+                  <dd>EXAMPLE 90 s</dd>
                 </div>
               </dl>
               <div class="act rise" style="--i: 4">
@@ -874,7 +891,7 @@
                   Market Analysis →</button
                 ><a
                   class="btn ghost"
-                  href="https://github.com/[YOU]/[REPO]"
+                  href="https://github.com/Tay008/[REPO]"
                   rel="noopener"
                   data-ur="Repo dekhein ↗"
                   >View repo ↗</a
@@ -887,16 +904,16 @@
         <!-- ============ PROJECT 2 ============ -->
         <article
           class="stage"
-          id="store"
+          id="argus"
           data-lens="market"
-          data-kw="shop store sell online orders payments ecommerce dukaan order products cart"
-          aria-labelledby="store-t"
+          data-kw="security vulnerability scanner sast sca audit code review bugs cve dependency secrets injection static analysis appsec"
+          aria-labelledby="argus-t"
         >
           <p class="idx">
-            <span>02</span>/03 ·
-            <span data-ur="Online dukaan">Online store</span>
+            <span>02</span>/04 ·
+            <span data-ur="Security scanner">Security scanner</span>
           </p>
-          <h2 class="ttl" id="store-t">[PROJECT NAME]</h2>
+          <h2 class="ttl" id="argus-t">Argus</h2>
           <div class="wrap">
             <section
               class="panel"
@@ -907,34 +924,37 @@
               <div class="rib rise" style="--i: 0">
                 <b data-ur="FAISLA">THE VERDICT</b>
                 <ul>
-                  <li data-ur="Slow internet par bhi tez khulti hai">
-                    Loads fast on slow internet
+                  <li data-ur="Bug attacker se pehle mil jata hai">
+                    Finds the bug before an attacker does
                   </li>
-                  <li data-ur="Din ya raat, orders milte rahein">
-                    Takes orders any time of day
+                  <li data-ur="Har commit par chalta hai, saal mein ek baar nahi">
+                    Runs on every commit, not once a year
                   </li>
-                  <li data-ur="Urdu aur English dono mein">
-                    Works in Urdu and English
+                  <li data-ur="Sirf warning nahi, hal bhi deta hai">
+                    Explains the fix, not just the warning
                   </li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/store-market"
-                data-alt="A customer picks two items, pays, and sees an order confirmation on a phone."
+                data-demo="demos/argus-market"
+                data-alt="A pull request receives a security finding with a suggested patch."
               >
-                <span>Demo video: add demos/store-market.mp4</span>
+                <span>Demo video: add demos/argus-market.mp4</span>
               </figure>
               <p class="story rise" style="--i: 2">
-                EXAMPLE: A home bakery took orders through Instagram messages
-                and lost some every night. Now customers pick items and get a
-                confirmation on their phone, even on slow data.
+                PITCH: A one-off security audit costs more than a small team
+                spends on tooling all year, and it is stale a week later. Argus
+                watches every commit instead: it catches the injection, the
+                leaked key and the outdated dependency, then hands the
+                developer a patch inside the same pull request. Security stops
+                being an annual event and becomes a daily habit.
               </p>
               <ul class="ben rise" style="--i: 3">
-                <li>Fewer lost orders</li>
-                <li>Customers can order at night</li>
-                <li>Update prices yourself</li>
+                <li>Continuous, not annual</li>
+                <li>Noise filtered, real findings only</li>
+                <li>A fix ready in the same PR</li>
               </ul>
               <div class="act rise" style="--i: 4">
                 <button
@@ -946,9 +966,9 @@
                 ><a
                   class="btn ghost"
                   href="#contact"
-                  data-w="Online store"
-                  data-ur="Mujhe bhi aisa kuch chahiye?"
-                  >Want one like this?</a
+                  data-w="Argus"
+                  data-ur="Demo maangein"
+                  >Request a demo</a
                 >
               </div>
             </section>
@@ -960,34 +980,43 @@
             >
               <div class="rib tech rise" style="--i: 0">
                 <b>STACK</b>
-                <p>HTML · CSS · Vanilla JS · Cloudflare Workers</p>
+                <p>Go · Tree-sitter · Semgrep rules · GitHub App · PostgreSQL</p>
                 <ul class="flags">
-                  <li>A11y AA</li>
-                  <li>i18n EN/RU</li>
-                  <li>EXAMPLE: JS 18 KB</li>
+                  <li>SAST + SCA</li>
+                  <li>Reachability-filtered</li>
+                  <li>SARIF output</li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/store-tech"
-                data-alt="The store loading on throttled Slow 4G, then resized from 320 px to 1440 px."
+                data-demo="demos/argus-tech"
+                data-alt="Terminal output scanning a repository, then inline annotations on a GitHub diff."
               >
-                <span>Demo video: add demos/store-tech.mp4</span>
+                <span>Demo video: add demos/argus-tech.mp4</span>
               </figure>
               <ol class="dec rise" style="--i: 2">
-                <li>Static pages plus one Worker: no server to maintain.</li>
-                <li>Video instead of GIF: about 10x smaller, same look.</li>
-                <li>Cart kept in the browser: no account needed to order.</li>
+                <li>
+                  Code is parsed into a syntax tree, so findings point at real
+                  data flow instead of matching text.
+                </li>
+                <li>
+                  Taint tracking follows user input all the way to the
+                  dangerous sink — that is how an injection is proven.
+                </li>
+                <li>
+                  A reachability pass drops test-only and unreachable findings
+                  before they ever reach the developer.
+                </li>
               </ol>
               <dl class="met rise" style="--i: 3">
                 <div>
-                  <dt>LCP, mobile (Lighthouse)</dt>
-                  <dd>EXAMPLE 1.6 s</dd>
+                  <dt>Scan time, 100k LOC</dt>
+                  <dd>EXAMPLE 42 s</dd>
                 </div>
                 <div>
-                  <dt>Accessibility score</dt>
-                  <dd>EXAMPLE 100</dd>
+                  <dt>False positives per 1k findings</dt>
+                  <dd>EXAMPLE 6</dd>
                 </div>
               </dl>
               <div class="act rise" style="--i: 4">
@@ -999,7 +1028,7 @@
                   Market Analysis →</button
                 ><a
                   class="btn ghost"
-                  href="https://github.com/[YOU]/[REPO]"
+                  href="https://github.com/Tay008/[REPO]"
                   rel="noopener"
                   data-ur="Repo dekhein ↗"
                   >View repo ↗</a
@@ -1012,16 +1041,16 @@
         <!-- ============ PROJECT 3 ============ -->
         <article
           class="stage"
-          id="booking"
+          id="prism"
           data-lens="market"
-          data-kw="booking appointment schedule slots reservation clinic salon tuition calendar"
-          aria-labelledby="booking-t"
+          data-kw="figma design collaborative realtime multiplayer canvas crdt websocket prototype wireframe ui ux editor cursor presence"
+          aria-labelledby="prism-t"
         >
           <p class="idx">
-            <span>03</span>/03 ·
-            <span data-ur="Booking page">Booking page</span>
+            <span>03</span>/04 ·
+            <span data-ur="Realtime design tool">Real-time design tool</span>
           </p>
-          <h2 class="ttl" id="booking-t">[PROJECT NAME]</h2>
+          <h2 class="ttl" id="prism-t">Prism</h2>
           <div class="wrap">
             <section
               class="panel"
@@ -1032,34 +1061,36 @@
               <div class="rib rise" style="--i: 0">
                 <b data-ur="FAISLA">THE VERDICT</b>
                 <ul>
-                  <li data-ur="Time chunna sirf do tap mein">
-                    Pick a time in two taps
+                  <li data-ur="Sab ek saath edit karte hain, file kis ke paas hai khatam">
+                    Everyone edits at once — no more "who has the file?"
                   </li>
-                  <li data-ur="Booking ka confirmation foran">
-                    Instant booking confirmation
+                  <li data-ur="Cursor, selection aur har change live nazar aata hai">
+                    Cursors, selections and edits show up live
                   </li>
-                  <li data-ur="Phone calls kam ho jati hain">
-                    Far fewer phone calls
+                  <li data-ur="Internet jaye to bhi kaam chalta rehta hai">
+                    Keep working when the internet drops
                   </li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/booking-market"
-                data-alt="A parent picks a Tuesday slot and receives a confirmation."
+                data-demo="demos/prism-market"
+                data-alt="Three cursors moving across one canvas while the design changes in real time."
               >
-                <span>Demo video: add demos/booking-market.mp4</span>
+                <span>Demo video: add demos/prism-market.mp4</span>
               </figure>
               <p class="story rise" style="--i: 2">
-                EXAMPLE: A tuition academy answered the same scheduling calls
-                all day. Now parents pick a slot online and the phone finally
-                stops ringing.
+                PITCH: Design review is still screenshots pasted into a group
+                chat and a file called final_v7. Prism puts the whole team on
+                one canvas: designers, engineers and clients comment exactly
+                where the change is, and every edit lands on every screen
+                within a frame. Fewer meetings, no lost files, no version soup.
               </p>
               <ul class="ben rise" style="--i: 3">
-                <li>No double bookings</li>
-                <li>Reminders go out automatically</li>
-                <li>Works from a phone</li>
+                <li>One live file, never final_v7</li>
+                <li>Feedback pinned to the pixel</li>
+                <li>Works offline, syncs on reconnect</li>
               </ul>
               <div class="act rise" style="--i: 4">
                 <button
@@ -1071,9 +1102,9 @@
                 ><a
                   class="btn ghost"
                   href="#contact"
-                  data-w="Booking page"
-                  data-ur="Mujhe bhi aisa kuch chahiye?"
-                  >Want one like this?</a
+                  data-w="Prism"
+                  data-ur="Demo maangein"
+                  >Request a demo</a
                 >
               </div>
             </section>
@@ -1085,38 +1116,43 @@
             >
               <div class="rib tech rise" style="--i: 0">
                 <b>STACK</b>
-                <p>HTML · CSS · Vanilla JS · Cloudflare Workers</p>
+                <p>TypeScript · Yjs CRDT · WebSockets · WebGL · PostgreSQL</p>
                 <ul class="flags">
-                  <li>A11y AA</li>
-                  <li>Keyboard-first</li>
-                  <li>EXAMPLE: INP 90 ms</li>
+                  <li>Multiplayer</li>
+                  <li>Offline-first</li>
+                  <li>60 fps canvas</li>
                 </ul>
               </div>
               <figure
                 class="demo rise"
                 style="--i: 1"
-                data-demo="demos/booking-tech"
-                data-alt="Booking a slot using only the keyboard."
+                data-demo="demos/prism-tech"
+                data-alt="Two browser tabs staying in sync while DevTools streams CRDT updates over a socket."
               >
-                <span>Demo video: add demos/booking-tech.mp4</span>
+                <span>Demo video: add demos/prism-tech.mp4</span>
               </figure>
               <ol class="dec rise" style="--i: 2">
                 <li>
-                  Slots checked on the server, so double booking is impossible.
+                  CRDTs instead of locks: every edit merges, so arrival order
+                  never matters.
                 </li>
                 <li>
-                  Native form controls: free accessibility and mobile keyboards.
+                  Shape updates are batched per animation frame to hold 60 fps
+                  under load.
                 </li>
-                <li>Confirmation sent as a WhatsApp message link.</li>
+                <li>
+                  Offline edits queue on the device and replay on reconnect
+                  without conflicts.
+                </li>
               </ol>
               <dl class="met rise" style="--i: 3">
                 <div>
-                  <dt>INP (Lighthouse)</dt>
-                  <dd>EXAMPLE 90 ms</dd>
+                  <dt>Concurrent editors per document</dt>
+                  <dd>EXAMPLE 50</dd>
                 </div>
                 <div>
-                  <dt>CLS</dt>
-                  <dd>EXAMPLE 0.01</dd>
+                  <dt>Cursor update latency</dt>
+                  <dd>EXAMPLE 45 ms</dd>
                 </div>
               </dl>
               <div class="act rise" style="--i: 4">
@@ -1128,7 +1164,144 @@
                   Market Analysis →</button
                 ><a
                   class="btn ghost"
-                  href="https://github.com/[YOU]/[REPO]"
+                  href="https://github.com/Tay008/[REPO]"
+                  rel="noopener"
+                  data-ur="Repo dekhein ↗"
+                  >View repo ↗</a
+                >
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- ============ PROJECT 4 ============ -->
+        <article
+          class="stage"
+          id="lumen"
+          data-lens="market"
+          data-kw="tutoring tutor students notes study academic school college exam revision flashcards spaced repetition lessons video learning"
+          aria-labelledby="lumen-t"
+        >
+          <p class="idx">
+            <span>04</span>/04 ·
+            <span data-ur="Tutoring aur notes">Tutoring and notes</span>
+          </p>
+          <h2 class="ttl" id="lumen-t">Lumen</h2>
+          <div class="wrap">
+            <section
+              class="panel"
+              data-p="market"
+              data-s="active"
+              aria-label="Market analysis"
+            >
+              <div class="rib rise" style="--i: 0">
+                <b data-ur="FAISLA">THE VERDICT</b>
+                <ul>
+                  <li data-ur="Sabak aur notes ek hi jagah rehte hain">
+                    The lesson and the notes stay in one place
+                  </li>
+                  <li data-ur="Notes ko matlab se dhoondein, sirf lafz se nahi">
+                    Search notes by meaning, not spelling
+                  </li>
+                  <li data-ur="Slot khud book hota hai aur yaad bhi dilaya jata hai">
+                    Slots book and remind themselves
+                  </li>
+                </ul>
+              </div>
+              <figure
+                class="demo rise"
+                style="--i: 1"
+                data-demo="demos/lumen-market"
+                data-alt="A student books a tutor session and the notes from that lesson land in their notebook."
+              >
+                <span>Demo video: add demos/lumen-market.mp4</span>
+              </figure>
+              <p class="story rise" style="--i: 2">
+                PITCH: Students pay for tutoring and then lose the lesson —
+                notes scattered across WhatsApp, paper and screenshots. Lumen
+                ties the session to the notes: book a tutor, join the lesson,
+                and the notes, recording and flashcards are filed against that
+                class. Tutors keep their own students, revision actually
+                happens, and learning stops leaking out the back door.
+              </p>
+              <ul class="ben rise" style="--i: 3">
+                <li>Notes, sessions and flashcards linked</li>
+                <li>Revision scheduled for you</li>
+                <li>Tutors keep their own students</li>
+              </ul>
+              <div class="act rise" style="--i: 4">
+                <button
+                  class="btn glow"
+                  data-t="tech"
+                  data-ur="Tech Analysis dekhein →"
+                >
+                  Tech Analysis →</button
+                ><a
+                  class="btn ghost"
+                  href="#contact"
+                  data-w="Lumen"
+                  data-ur="Demo maangein"
+                  >Request a demo</a
+                >
+              </div>
+            </section>
+            <section
+              class="panel"
+              data-p="tech"
+              data-s="inactive"
+              aria-label="Tech analysis"
+            >
+              <div class="rib tech rise" style="--i: 0">
+                <b>STACK</b>
+                <p>Next.js · pgvector · WebRTC · PostgreSQL · Stripe</p>
+                <ul class="flags">
+                  <li>Semantic search</li>
+                  <li>Spaced repetition</li>
+                  <li>Live sessions</li>
+                </ul>
+              </div>
+              <figure
+                class="demo rise"
+                style="--i: 1"
+                data-demo="demos/lumen-tech"
+                data-alt="Typing a question and getting the matching note, then a revision queue built from it."
+              >
+                <span>Demo video: add demos/lumen-tech.mp4</span>
+              </figure>
+              <ol class="dec rise" style="--i: 2">
+                <li>
+                  Notes are embedded with pgvector, so search matches meaning
+                  rather than spelling.
+                </li>
+                <li>
+                  Spaced repetition schedules each card from the student's own
+                  recall history.
+                </li>
+                <li>
+                  WebRTC carries the live session, so lesson media never
+                  touches our servers.
+                </li>
+              </ol>
+              <dl class="met rise" style="--i: 3">
+                <div>
+                  <dt>Note search p95, 1M notes</dt>
+                  <dd>EXAMPLE 120 ms</dd>
+                </div>
+                <div>
+                  <dt>Recall after 4 weeks</dt>
+                  <dd>EXAMPLE +34%</dd>
+                </div>
+              </dl>
+              <div class="act rise" style="--i: 4">
+                <button
+                  class="btn glow"
+                  data-t="market"
+                  data-ur="Market Analysis dekhein →"
+                >
+                  Market Analysis →</button
+                ><a
+                  class="btn ghost"
+                  href="https://github.com/Tay008/[REPO]"
                   rel="noopener"
                   data-ur="Repo dekhein ↗"
                   >View repo ↗</a
@@ -1153,9 +1326,10 @@
             >
             <select id="fs" required>
               <option value="">Choose…</option>
-              <option>Business website</option>
-              <option>Online store</option>
-              <option>Booking page</option>
+              <option>Bazaar</option>
+              <option>Argus</option>
+              <option>Prism</option>
+              <option>Lumen</option>
               <option>Something else</option>
             </select>
             <label for="fm" data-ur="Chand tafseelat">A few details</label>
@@ -1449,7 +1623,7 @@
         setTimeout(() => r.classList.remove("sorted"), 1000);
       });
 
-      /* ---- Contact: "Want one like this?" prefill, send via WhatsApp ---- */
+      /* ---- Contact: "Request a demo" prefill, send via WhatsApp ---- */
       document.addEventListener("click", (e) => {
         const a = e.target.closest("[data-w]");
         if (!a) return;
