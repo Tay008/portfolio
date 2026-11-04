@@ -352,6 +352,28 @@
         --line: var(--paper);
         --soft: var(--mi);
       }
+      #daymap .panel[data-p="tech"] {
+        --bg: var(--paper);
+        --fg: var(--ink);
+        --line: var(--ink);
+        --soft: var(--muted);
+      }
+      #daymap .story {
+        font-size: var(--body);
+      }
+      #daymap .rib p {
+        font-size: var(--cap);
+      }
+      #daymap .dec li {
+        font-size: var(--cap);
+      }
+      #daymap .met dt,
+      #daymap .met dd {
+        font-size: var(--cap);
+      }
+      #daymap .panel {
+        gap: 0.75rem;
+      }
       .js .panel {
         grid-area: 1/1;
       }
@@ -730,8 +752,8 @@
         </form>
         <ul class="chips">
           <li>
-            <a class="chip" href="#bazaar" data-ur="Do tarfa marketplace"
-              >Bazaar</a
+            <a class="chip" href="#daymap" data-ur="Productivity tracking app"
+              >DayMap</a
             >
           </li>
           <li>
@@ -767,16 +789,16 @@
         <!-- ============ PROJECT 1 ============ -->
         <article
           class="stage"
-          id="bazaar"
+          id="daymap"
           data-lens="market"
-          data-kw="marketplace two sided multi vendor ecommerce sellers buyers vendor shop store orders cart checkout payouts escrow commission reviews catalog"
-          aria-labelledby="bazaar-t"
+          data-kw="daymap productivity tracking app to do tasks progress pages chapters milestones custom domains prayer schedule reminders pwa neo brutalist"
+          aria-labelledby="daymap-t"
         >
           <p class="idx">
             <span>01</span>/04 ·
-            <span data-ur="Do tarfa marketplace">Two-sided marketplace</span>
+            <span data-ur="Productivity tracking app">Productivity tracking app</span>
           </p>
-          <h2 class="ttl" id="bazaar-t">Bazaar</h2>
+          <h2 class="ttl" id="daymap-t">DayMap</h2>
           <div class="wrap">
             <section
               class="panel"
@@ -787,37 +809,37 @@
               <div class="rib rise" style="--i: 0">
                 <b data-ur="FAISLA">THE VERDICT</b>
                 <ul>
-                  <li data-ur="Ek platform, do taraf: kharidar aur bechne wale">
-                    One platform, two sides: buyers and sellers
+                  <li data-ur="To-do lists ko measurable progress system mein badalta hai">
+                    Turns to-do lists into a measurable progress system
                   </li>
-                  <li data-ur="Payment khud baant jati hai, koi peecha nahi karta">
-                    Payments split themselves — nobody chases anybody
+                  <li data-ur="Pages, chapters, milestones aur custom task domains">
+                    Tracks pages, chapters, milestones and custom task domains
                   </li>
-                  <li data-ur="Bharosa shuru se: reviews aur verified sellers">
-                    Trust from day one: reviews and verified sellers
+                  <li data-ur="Prayer schedules aur interactive reminders integrated">
+                    Prayer schedules and interactive reminders built in
                   </li>
                 </ul>
               </div>
-              <figure
-                class="demo rise"
-                style="--i: 1"
-                data-demo="demos/bazaar-market"
-                data-alt="A seller lists an item, a buyer pays, and the payout splits automatically on a phone."
-              >
-                <span>Demo video: add demos/bazaar-market.mp4</span>
+              <figure class="demo rise" style="--i: 1">
+                <img
+                  src="project-1.gif"
+                  alt="DayMap productivity tracking app demo"
+                  style="width:100%;height:100%;object-fit:cover;display:block"
+                />
               </figure>
               <p class="story rise" style="--i: 2">
-                PITCH: Every marketplace dies the same way — sellers arrive to
-                no buyers, or buyers to empty shelves. Bazaar fixes the cold
-                start: sellers list in minutes, buyers land on a curated
-                catalog, and the platform earns a cut on every completed order.
-                Each new seller makes the buyer side worth more, and every new
-                buyer pulls in more sellers.
+                Day Map transforms traditional to-do lists into a measurable
+                productivity system. Track real progress through pages, chapters,
+                milestones, and custom task domains. Stay organized with
+                integrated prayer schedules and interactive reminders.
+                Experience a distinctive Neo-Brutalist interface with glowing
+                visuals and infographics. A personalized study and productivity
+                platform with accounts, cloud sync, and backups.
               </p>
               <ul class="ben rise" style="--i: 3">
-                <li>Both sides live in one sprint</li>
-                <li>Revenue on orders, not signups</li>
-                <li>Reviews and verification sell for you</li>
+                <li>Track real progress, not just checkboxes</li>
+                <li>Prayer schedules and reminders built in</li>
+                <li>Accounts, cloud sync and backups</li>
               </ul>
               <div class="act rise" style="--i: 4">
                 <button
@@ -829,7 +851,7 @@
                 ><a
                   class="btn ghost"
                   href="#contact"
-                  data-w="Bazaar"
+                  data-w="DayMap"
                   data-ur="Demo maangein"
                   >Request a demo</a
                 >
@@ -841,45 +863,50 @@
               data-s="inactive"
               aria-label="Tech analysis"
             >
-              <div class="rib tech rise" style="--i: 0">
+              <div class="rib rise" style="--i: 0">
                 <b>STACK</b>
-                <p>Next.js · TypeScript · PostgreSQL · Stripe Connect · Redis</p>
+                <p>
+                  Frontend: Vite, TypeScript, and modern web technologies. Backend:
+                  Firebase authentication and cloud integration. Platform:
+                  Installable Progressive Web App (PWA). Core: Custom task domains
+                  and quantitative progress tracking. Design: Responsive
+                  Neo-Brutalist UI with interactive notifications.
+                </p>
                 <ul class="flags">
-                  <li>Multi-vendor</li>
-                  <li>Escrow payouts</li>
-                  <li>SSR storefront</li>
+                  <li>Neo-Brutalist</li>
+                  <li>PWA</li>
+                  <li>Firebase</li>
                 </ul>
               </div>
-              <figure
-                class="demo rise"
-                style="--i: 1"
-                data-demo="demos/bazaar-tech"
-                data-alt="A seller dashboard showing an order, its split payout and the platform fee."
-              >
-                <span>Demo video: add demos/bazaar-tech.mp4</span>
+              <figure class="demo rise" style="--i: 1">
+                <img
+                  src="project-1.gif"
+                  alt="DayMap tech demo"
+                  style="width:100%;height:100%;object-fit:cover;display:block"
+                />
               </figure>
               <ol class="dec rise" style="--i: 2">
                 <li>
-                  Stripe Connect splits the money at capture, so the platform
-                  never holds funds.
+                  Progress is measured in pages, chapters and milestones, not
+                  just checkboxes.
                 </li>
                 <li>
-                  Row-level security keys every order and payout to its own
-                  seller.
+                  Prayer schedules and interactive reminders keep the daily
+                  rhythm on track.
                 </li>
                 <li>
-                  The catalog is cached at the edge; only cart and checkout
-                  reach the origin.
+                  A PWA with cloud sync keeps data available offline and across
+                  devices.
                 </li>
               </ol>
               <dl class="met rise" style="--i: 3">
                 <div>
-                  <dt>Checkout p95</dt>
-                  <dd>EXAMPLE 380 ms</dd>
+                  <dt>Task domains</dt>
+                  <dd>Custom</dd>
                 </div>
                 <div>
-                  <dt>Seller onboarding</dt>
-                  <dd>EXAMPLE 90 s</dd>
+                  <dt>Platform</dt>
+                  <dd>PWA</dd>
                 </div>
               </dl>
               <div class="act rise" style="--i: 4">
@@ -891,7 +918,7 @@
                   Market Analysis →</button
                 ><a
                   class="btn ghost"
-                  href="https://github.com/Tay008/[REPO]"
+                  href="https://github.com/Tay008/DayMap"
                   rel="noopener"
                   data-ur="Repo dekhein ↗"
                   >View repo ↗</a
@@ -1326,7 +1353,7 @@
             >
             <select id="fs" required>
               <option value="">Choose…</option>
-              <option>Bazaar</option>
+              <option>DayMap</option>
               <option>Argus</option>
               <option>Prism</option>
               <option>Lumen</option>
@@ -1353,7 +1380,7 @@
               data-ur="WhatsApp (sab se tez)"
               >WhatsApp (fastest)</a
             >
-            <p><a href="mailto:[YOUR EMAIL]">[YOUR EMAIL]</a></p>
+            <p><a href="mailto:socraticdev0@gmail.com">socraticdev0@gmail.com</a></p>
           </aside>
         </div>
       </section>
@@ -1377,7 +1404,7 @@
     <div id="live" class="sr-only" aria-live="polite"></div>
 
     <script>
-      const WA = "92XXXXXXXXXX"; // your number: country code + digits, no + and no leading 0
+      const WA = "923258790614"; // your number: country code + digits, no + and no leading 0
       const $ = (s, r = document) => r.querySelector(s),
         $$ = (s, r = document) => [...r.querySelectorAll(s)];
       const ls = (k, v) => {
@@ -1511,6 +1538,7 @@
         { threshold: [0, 0.5] },
       );
       $$(".demo").forEach((d) => {
+        if (!d.dataset.demo) return;
         const base = d.dataset.demo,
           v = document.createElement("video"),
           b = document.createElement("button");

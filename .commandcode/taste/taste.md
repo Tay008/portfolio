@@ -1,0 +1,1 @@
+- Do not prefix pitch copy with a "PITCH:" label. Confidence: 0.8
